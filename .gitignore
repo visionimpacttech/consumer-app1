@@ -1,0 +1,13 @@
+# Ignore node_modules and build files
+node_modules/
+.next/
+out/
+dist/
+package-lock.json
+yarn.lock
+.DS_Store
+.env
+.idea/
+.vscode/
+coverage/
+.vercel
