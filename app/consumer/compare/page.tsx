@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 
 const CompareVendors = () => {
-  const [vendors, setVendors] = useState<any[]>([]); // Added type safety
+  const [vendors, setVendors] = useState<any[]>([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const selectedVendors = JSON.parse(localStorage.getItem("selectedVendors") || "[]");
-      setVendors(selectedVendors);
+      const storedVendors = localStorage.getItem("selectedWorkers"); // ✅ Ensure correct key
+      if (storedVendors) {
+        setVendors(JSON.parse(storedVendors));
+      }
     }
   }, []);
 
@@ -40,12 +42,7 @@ const CompareVendors = () => {
                 <td key={vendor.id} className="border border-gray-300 p-2">₹{vendor.price}</td>
               ))}
             </tr>
-            <tr>
-              <td className="border border-gray-300 p-2 font-bold">Location</td>
-              {vendors.map((vendor) => (
-                <td key={vendor.id} className="border border-gray-300 p-2">{vendor.location}</td>
-              ))}
-            </tr>
+            
           </tbody>
         </table>
       )}

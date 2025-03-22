@@ -32,13 +32,15 @@ type Product = {
   weight?: string;
   brand?: string;
   phone?: string;
-  chat?:string
+  chat?:string;
+  profession?: string;
 };
 
 export default function ConsumerDashboard() {
   const { user, logout } = useAuth();
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
+  const [workerFilter, setWorkerFilter] = useState("all");
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [displayedProducts, setDisplayedProducts] = useState<{
     material: Product[];
@@ -93,10 +95,15 @@ export default function ConsumerDashboard() {
       let filtered = displayedProducts[category].filter((product) =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
+  
       if (priceFilter === "lowToHigh") {
         filtered.sort((a, b) => a.price - b.price);
       } else if (priceFilter === "highToLow") {
         filtered.sort((a, b) => b.price - a.price);
+      }
+  
+      if (category === "worker" && workerFilter !== "all") {
+        filtered = filtered.filter((product) => product.profession === workerFilter);
       }
   
       if (ratingFilter !== "all") {
@@ -105,24 +112,35 @@ export default function ConsumerDashboard() {
   
       return filtered;
     },
-    [displayedProducts, searchTerm, priceFilter, ratingFilter]
+    [displayedProducts, searchTerm, priceFilter, ratingFilter, workerFilter] // ✅ Added `workerFilter`
   );
+  
   
   const toggleWorkerSelection = (worker: Product) => {
     setSelectedWorkers((prev) => {
-      if (prev.some((w) => w.id === worker.id)) {
-        return prev.filter((w) => w.id !== worker.id);
+      const isAlreadySelected = prev.some((w) => w.id === worker.id);
+      if (isAlreadySelected) {
+        return prev.filter((w) => w.id !== worker.id); // ✅ Remove if already selected
       }
-      return [...prev, worker];
+      return [...prev, worker]; // ✅ Add new selection
     });
   };
 
   const handleCompare = () => {
+    console.log("Selected Workers:", selectedWorkers); // ✅ Debugging Log
+    console.log("Selected Workers Count:", selectedWorkers.length);
+  
     if (selectedWorkers.length >= 2) {
       localStorage.setItem("selectedWorkers", JSON.stringify(selectedWorkers));
+  
+      // ✅ Log the stored data to verify
+      console.log("Stored Workers in localStorage:", localStorage.getItem("selectedWorkers"));
+  
       router.push("/consumer/compare");
+    } else {
+      alert("Please select at least 2 vendors to compare.");
     }
-  };
+  }; 
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -243,26 +261,43 @@ export default function ConsumerDashboard() {
                 <CardHeader>
                   <CardTitle>Professional Workers</CardTitle>
                 </CardHeader>
+            {/* Rating Filter */}
+            <Select onValueChange={(value) => setWorkerFilter(value)}>
+                    <SelectTrigger className="w-[180px]">
+                       <SelectValue placeholder="Filter by Profession" />
+                    </SelectTrigger>
+                    <SelectContent>
+                    <SelectItem value="all">All Professions</SelectItem>
+                      <SelectItem value="Interior designer">Interior designer</SelectItem>
+                      <SelectItem value="Architect">Architect</SelectItem>
+                      <SelectItem value="Painter">Painter</SelectItem>
+                      <SelectItem value="Plumber">Plumber </SelectItem>
+                      <SelectItem value="Electrician">Electrician</SelectItem>
+                      <SelectItem value="Carpenter">Carpenter</SelectItem>
+                      <SelectItem value="Civil engineers">Civil engineers</SelectItem>
+                      <SelectItem value="Labour">Labour </SelectItem>
+                          
+                    </SelectContent>
+              </Select>    
                 <CardContent>
-                  <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              
+                <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                     {filteredProducts("worker").map((worker) => (
-                      <motion.div key={worker.id} className="flex items-center space-x-3">
+                      <motion.div key={worker.id} className="cursor-pointer" onClick={() => setSelectedProduct(worker)}>
                         <input
                           type="checkbox"
                           checked={selectedWorkers.some((w) => w.id === worker.id)}
                           onChange={() => toggleWorkerSelection(worker)}
                         />
-                        <Card className="cursor-pointer">
-                          <CardContent className="p-4">
-                            <img src={worker.image} alt={worker.name} className="w-full h-40 object-cover mb-2 rounded-md" />
-                            <h3 className="font-bold">{worker.name}</h3>
-                            <p>₹{worker.price}</p>
-                            <p>Rating: {worker.rating} stars</p>
-                          </CardContent>
-                        </Card>
+                        <CardContent className="p-4">
+                          <img src={worker.image} alt={worker.name} className="w-full h-40 object-cover mb-2 rounded-md" />
+                          <h3 className="font-bold">{worker.name}</h3>
+                          <p>₹{worker.price}</p>
+                        </CardContent>
                       </motion.div>
                     ))}
                   </motion.div>
+            
                   <Button onClick={handleCompare} disabled={selectedWorkers.length < 2} className="mt-4">
                     Compare Selected Workers
                   </Button>

@@ -9,6 +9,8 @@ type Product = {
   category: "material" | "machine" | "worker"
   sellerId: string
   rating: number
+  phone: number
+  profession: string
 }
 
 const INITIAL_PRODUCTS: Product[] = [
@@ -38,12 +40,13 @@ const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 3,
-    name: "Skilled Mason",
+    name: "Interior designer",
     price: 800,
     image:
-      "https://plus.unsplash.com/premium_photo-1683140489519-d5e8d2c7aced?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description: "Experienced mason for brickwork and stonework",
+      "https://zicanagpur.com/wp-content/uploads/2022/02/Interior-Design.jpg",
+    description: "Premium designs with opulent finishes and aesthetics.",
     category: "worker",
+    profession: "Interior designer",
     sellerId: "system",
     phone: "+919876543210",
     chat: "/chat?vendorId=1"
@@ -62,12 +65,13 @@ const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 5,
-    name: "Crane Operator",
+    name: "Architect ",
     price: 1200,
     image:
-      "https://images.unsplash.com/photo-1509390726584-faaa21c8ac95?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description: "Skilled crane operator for heavy lifting tasks",
+      "https://s3da-design.com/wp-content/uploads/2022/02/Architects-1024x1024.jpg",
+    description: "High-end, bespoke designs for premium residences.",
     category: "worker",
+    profession: "Architect",
     sellerId: "system",
     phone: "+919876543210",
     chat: "/chat?vendorId=1"
@@ -146,12 +150,13 @@ const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 12,
-    name: "Civil Engineer",
+    name: " Painter",
     price: 200000,
     image:
-      "https://plus.unsplash.com/premium_photo-1681691912442-68c4179c530c?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description: "Every plane has to be Organised",
+      "https://cdn.pixabay.com/photo/2020/02/17/09/36/painter-4856002_1280.jpg",
+    description: "Applies paint, coatings, and finishes to surfaces for aesthetic and protective purposes",
     category: "worker",
+    profession: "Painter",
     sellerId: "system",
     phone: "+919876543210",
     chat: "/chat?vendorId=1"
@@ -164,6 +169,7 @@ const INITIAL_PRODUCTS: Product[] = [
       "https://plus.unsplash.com/premium_photo-1677151140792-e1b681faffbb?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description: "Shape your Woods, just like your Life",
     category: "worker",
+    profession: "Carpenter",
     sellerId: "system",
     phone: "+919876543210",
     chat: "/chat?vendorId=1"
@@ -202,6 +208,58 @@ const INITIAL_PRODUCTS: Product[] = [
     category: "machine",
     sellerId: "system",
     phone: "+919876543210",
+    chat: "/chat?vendorId=1"
+  },
+  {
+    id: 17,
+    name: "Plumber",
+    price: 6000,
+    image:
+      "https://t4.ftcdn.net/jpg/02/20/20/41/360_F_220204174_vfgB0Vo2i4MZ8Sv5hmtsx5IwcvrDCZox.jpg",
+    description: "Efficient for small-scale Loads",
+    category: "worker",
+    profession: "Plumber",
+    sellerId: "system",
+    phone: "+919988756487",
+    chat: "/chat?vendorId=1"
+  },
+  {
+    id: 18,
+    name: "Electrician",
+    price: 5500,
+    image:
+      "https://scitexas.edu/wp-content/uploads/2019/10/how-to-become-electrician-scitexas.edu_.jpg",
+    description: "Efficient for small-scale Loads",
+    category: "worker",
+    profession: "Electrician",
+    sellerId: "system",
+    phone: "+919988756487",
+    chat: "/chat?vendorId=1"
+  },
+  {
+    id: 19,
+    name: "Civil engineers",
+    price: 10000,
+    image:
+      "https://www.stonewallco.com/hubfs/Construction%20civil%20engineer%20technician%20and%20architect%20working.png",
+    description: "Efficient for small-scale Loads",
+    category: "worker",
+    profession: "Civil engineers",
+    sellerId: "system",
+    phone: "+918823769302",
+    chat: "/chat?vendorId=1"
+  },
+  {
+    id: 20,
+    name: "Labour",
+    price: 3000,
+    image:
+      "https://bsmedia.business-standard.com/_media/bs/img/article/2024-04/30/full/1714455852-3822.jpg",
+    description: "Efficient for small-scale Loads",
+    category: "worker",
+    profession: "Labour",
+    sellerId: "system",
+    phone: "+91994566022",
     chat: "/chat?vendorId=1"
   },
 ]

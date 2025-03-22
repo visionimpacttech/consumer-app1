@@ -21,6 +21,7 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  swcMinify: false,  // <- Add this line to disable SWC minification
 };
 
 mergeConfig(nextConfig, userConfig);
