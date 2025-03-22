@@ -326,13 +326,13 @@ export default function ConsumerDashboard() {
                  {/* 🔹 Add Call & Chat Buttons */}
           <div className="flex gap-4 mt-4">
             <Button asChild>
-              <a href={`tel:${selectedProduct.contact?.phone}`} target="_blank">
+              <a href={`tel:${selectedProduct.phone?.phone}`} target="_blank">
                 📞 Call Now
               </a>
             </Button>
 
             <Button 
-                 onClick={() => window.open(`https://wa.me/${selectedProduct?.contact?.phone}`, "_blank")}
+                 onClick={() => window.open(`https://wa.me/${selectedProduct?.phone?.phone}`, "_blank")}
                 >
                   💬 Chat Now
             </Button>
